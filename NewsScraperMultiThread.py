@@ -76,7 +76,7 @@ def main(shouldDeleteFile=False):
     with open(f'{os.getcwd()}/time_stamp.txt', 'r') as f:
         lastDate = f.read()
         if lastDate == time.strftime("%Y-%m-%d"):
-            print('already ran this')
+            print(f'{__file__}: already ran this')
             return
     with open(f'{os.getcwd()}/time_stamp.txt', 'w') as f:
         f.write(time.strftime("%Y-%m-%d"))
