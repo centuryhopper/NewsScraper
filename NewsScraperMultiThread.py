@@ -47,6 +47,8 @@ def processToExcelFile() -> str:
                           'general', 'health', 'science', 'sports', 'technology']
     dfs = []
     filePath = f'{os.getcwd()}/files/'
+    if not os.path.exists(filePath):
+        os.makedirs(filePath)
     # didn't use relative path (such as ./files because this path is global on the computer and would maintain correctness of desired file storing locations regardless of who is running this file, whether that's running this script directly or running this script via another python script)
     if not os.path.isdir(filePath):
         os.mkdir(filePath)
