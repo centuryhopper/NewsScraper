@@ -1,17 +1,20 @@
 import concurrent.futures
 import os
 import time
-from secrets import Secrets
 
 import pandas as pd
 import requests
 from openpyxl import load_workbook
 from openpyxl.styles import Font
 from openpyxl.utils import get_column_letter
-
+import sys
+from dotenv import load_dotenv
+load_dotenv()
+sys.path.append('/home/leo_zhang/Documents/GitHub/automate_texting/')
+from automate_texting import send_message
 
 def getNewsAsDataFrame(category=''):
-    url = f'https://newsapi.org/v2/top-headlines?country=us&category={category}&apiKey={Secrets.newsapiKey}'
+    url = f'https://newsapi.org/v2/top-headlines?country=us&category={category}&apiKey={os.getenv("newsapiKey")}'
     newsJson = requests.get(url).json()
     articles = newsJson['articles']
     titles = []
@@ -89,7 +92,8 @@ def main(shouldDeleteFile=False):
 
     if shouldDeleteFile and os.path.isfile(filePath+fileName):
         os.remove(filePath+fileName)
-
+    send_message(f'collected news for today {time.strftime("%Y-%m-%d")}')
+    
 
 if __name__ == '__main__':
     os.chdir(os.path.dirname(__file__))
