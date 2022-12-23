@@ -1,3 +1,10 @@
+import platform
+
+if platform.system() == "Linux":
+    import linux_tools as tools
+elif platform.system() == "Windows":
+    import windows_tools as tools
+
 import concurrent.futures
 import os
 import time
@@ -10,7 +17,7 @@ from openpyxl.utils import get_column_letter
 import sys
 from dotenv import load_dotenv
 load_dotenv()
-sys.path.append('/home/leo_zhang/Documents/GitHub/automate_texting/')
+sys.path.append(tools.AUTOMATE_TEXTING_PATH)
 from automate_texting import send_message
 
 def getNewsAsDataFrame(category=''):
@@ -93,7 +100,7 @@ def main(shouldDeleteFile=False):
     if shouldDeleteFile and os.path.isfile(filePath+fileName):
         os.remove(filePath+fileName)
     send_message(f'collected news for today {time.strftime("%Y-%m-%d")}')
-    
+
 
 if __name__ == '__main__':
     os.chdir(os.path.dirname(__file__))
