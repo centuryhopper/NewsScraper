@@ -62,7 +62,7 @@ def processToExcelFile() -> str:
     # didn't use relative path (such as ./files because this path is global on the computer and would maintain correctness of desired file storing locations regardless of who is running this file, whether that's running this script directly or running this script via another python script)
     if not os.path.isdir(filePath):
         os.mkdir(filePath)
-    fileName = f'news_{time.strftime("%Y%m%d-%H%M%S")}.xlsx'
+    fileName = f'news_{time.strftime("%Y_%m_%d-%H_%M_%S")}.xlsx'
     filePathComplete = f'{filePath}{fileName}'
     with concurrent.futures.ThreadPoolExecutor() as executor:
         res = executor.map(getNewsAsDataFrame, possibleCategories)
