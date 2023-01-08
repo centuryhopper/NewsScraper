@@ -17,8 +17,8 @@ from openpyxl.utils import get_column_letter
 import sys
 from dotenv import load_dotenv
 load_dotenv()
-sys.path.append(tools.AUTOMATE_TEXTING_PATH)
-from automate_texting import send_message
+sys.path.append(tools.AUTOMATE_EMAIL_PATH)
+from EmailingTool import EmailTool
 
 def getNewsAsDataFrame(category=''):
     url = f'https://newsapi.org/v2/top-headlines?country=us&category={category}&apiKey={os.getenv("newsapiKey")}'
@@ -99,7 +99,7 @@ def main(shouldDeleteFile=False):
 
     if shouldDeleteFile and os.path.isfile(filePath+fileName):
         os.remove(filePath+fileName)
-    send_message(f'collected news for today {time.strftime("%Y-%m-%d")}')
+    EmailTool.sendEmail('','', ['leozhang12345678@gmail.com'], 'Daily_News', f'collected news for today {time.strftime("%Y-%m-%d")}')
 
 
 if __name__ == '__main__':
