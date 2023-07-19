@@ -99,7 +99,7 @@ def main(shouldDeleteFile=False):
 
     if shouldDeleteFile and os.path.isfile(filePath+fileName):
         os.remove(filePath+fileName)
-    EmailTool.sendEmail('','', ['leozhang12345678@gmail.com'], 'Daily_News', f'collected news for today {time.strftime("%Y-%m-%d")}')
+    #EmailTool.sendEmail('','', ['leozhang12345678@gmail.com'], 'Daily_News', f'collected news for today {time.strftime("%Y-%m-%d")}')
 
 
 if __name__ == '__main__':
